@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../firebase/AuthProvider";
 
 
 const Header = () => {
+    const {user} =useContext(AuthContext);
+    console.log(user);
 
     const links = <>
         <li><NavLink to="/">Home</NavLink></li>
@@ -30,11 +34,10 @@ const Header = () => {
                 <ul className="menu menu-horizontal px-1">
                     {links}
                 </ul>
+                <p className="text-blue-500 font-bold">{user?.email}</p>
             </div>
             {/* <div className="navbar-end">
-                <ul className="menu menu-horizontal px-1">
-                    {links}
-                </ul>
+                <p>{user?.email}</p>
             </div> */}
         </div>
     );

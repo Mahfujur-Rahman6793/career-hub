@@ -13,6 +13,7 @@ import JObDetails from './components/JobDetails/JObDetails';
 import AuthProvider from './firebase/AuthProvider';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
+import PrivateRoute from './components/privateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,9 @@ const router = createBrowserRouter([
       },
       {
         path: '/job/:id',
-        element:<JObDetails></JObDetails>, 
+        element:<PrivateRoute>
+            <JObDetails></JObDetails>
+          </PrivateRoute>, 
         loader: () => fetch('/jobs.json') // do not load all data. load only what you need
       },
       {
