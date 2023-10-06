@@ -4,8 +4,7 @@ import { AuthContext } from "../../firebase/AuthProvider";
 
 
 const Header = () => {
-    const {user} =useContext(AuthContext);
-    console.log(user);
+    const {user , logOut} =useContext(AuthContext);
 
     const links = <>
         <li><NavLink to="/">Home</NavLink></li>
@@ -13,8 +12,12 @@ const Header = () => {
         <li><NavLink to="/applied">Applied Jobs</NavLink></li>
         <li><NavLink to="/statistics">Statistics</NavLink></li>
         <li><NavLink to="/blogs">Blogs</NavLink></li>
-        <li><NavLink to="/login">Login</NavLink></li>
+        
     </>
+
+    const handleLogOut=()=>{
+        logOut().then()
+    }
 
     return (
         <div className="navbar bg-base-100">
@@ -34,7 +37,13 @@ const Header = () => {
                 <ul className="menu menu-horizontal px-1">
                     {links}
                 </ul>
-                <p className="text-blue-500 font-bold">{user?.email}</p>
+                <div className="text-blue-500 font-bold">
+                    {user? <p><button onClick={handleLogOut} className="btn btn-primary">LogOut</button>{user.email}</p> 
+                    : 
+                    <ul>
+                        <li className="text-black font-normal"><NavLink to="/login">Login</NavLink></li>
+                    </ul>}
+                 </div>
             </div>
             {/* <div className="navbar-end">
                 <p>{user?.email}</p>
